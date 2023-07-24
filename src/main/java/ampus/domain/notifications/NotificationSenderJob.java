@@ -49,9 +49,6 @@ public class NotificationSenderJob implements Job, Listener<UserNotification> {
 
     @Override
     public void update(UserNotification newUserNotification) {
-        System.out.println(newUserNotification.getNotifyAt());
-        System.out.println(currentStart);
-        System.out.println(currentEnd);
         scheduleNotificationJob(newUserNotification);
     }
 

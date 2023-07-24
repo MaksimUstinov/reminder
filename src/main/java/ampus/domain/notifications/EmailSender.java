@@ -10,6 +10,6 @@ public class EmailSender implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("Notification sent!!!!");
+        log.info("Email notification sent!!!!");
     }
 }
