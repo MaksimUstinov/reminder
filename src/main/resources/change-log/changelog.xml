@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="0" author="ustinov">
+
+        <createTable tableName="_users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(250)">
+                <constraints unique="false" />
+            </column>
+        </createTable>
+
+        <createTable tableName="_notifications">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="title" type="varchar(255)" />
+            <column name="description" type="varchar(4096)" />
+            <column name="remind" type="timestamp with time zone" />
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="user_id_fk" referencedTableName="_users" deleteCascade="true" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1" author="ustinov">
+        <addColumn tableName="_users">
+            <column name="user_name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2" author="ustinov">
+        <addColumn tableName="_users">
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="_users">
+            <column name="telegram" type="varchar(255)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="3" author="ustinov">
+        <addColumn tableName="_notifications">
+            <column name="notified" type="boolean" defaultOnNull="false"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

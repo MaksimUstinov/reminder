@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: reminder
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${REMINDER_APP_CLIENT_ID}
+            client-secret: ${REMINDER_APP_CLIENT_SECRET}
+            scope:
+              - "profile"
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: change-log/changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:123}
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    org.springframework.security: TRACE
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    display-request-duration: true
+  show-actuator: true
+server:
+  port: 8080
+  forward-headers-strategy: framework
